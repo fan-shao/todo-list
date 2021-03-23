@@ -15,7 +15,7 @@
 
 Clone the repo into your local machine with the following:
 
-### `git clone`
+### `git clone https://github.com/fan-shao/todo-list.git`
 
 This app uses React v.17. In the project directory, run the following:
 
