@@ -117,8 +117,8 @@ header {
   width: 90%;
   height: 80%;
   font-size: 1em;
+  border-style: none;
   border-radius: 10px;
-  border: 0px;
 }
 
 .todo__todo-display {
@@ -137,12 +137,14 @@ header {
   width: 100px;
   font-size: 1em;
   background-color: #ffdf2b;
-  border: 0px;
   border-radius: 10px;
+  border-style: none;
+  transition: background-color 0.3 ease-in;
+  -moz-transition: background-color 0.3s ease-in;
+  -webkit-transition: background-color 0.3s ease-in;
 }
 
 .todo__edit-delete button:hover {
-  background-color: #fafafa;
-  box-shadow: 0px 0px 0px 1px #ffdf2b inset;
+  background-color: white;
   cursor: pointer;
 }

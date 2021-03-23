@@ -29,11 +29,7 @@ function App() {
   const handleEnter = (e) => {
     const code = e.keyCode || e.charCode;
     if (e.key === "Enter" || code === 13) {
-<<<<<<< HEAD
       addTodo(e);
-=======
-      addTodo();
->>>>>>> 92bc73c... complete
     }
   };
 
@@ -106,7 +102,7 @@ function App() {
             </form>
           </div>
           <div className="app__todo-filter">
-            <label for="filter-list">Filter list by completion:</label>
+            <label htmlFor="filter-list">Filter list by completion:</label>
             <select default onChange={(e) => setFilterVal(e.target.value)}>
               <option value="" disabled>
                 Filter by:
