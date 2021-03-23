@@ -11,6 +11,10 @@
 - Edit item on list
 - Delete item from list
 
+## To view the app
+
+Go to [https://fans-todo-list.netlify.app/](https://fans-todo-list.netlify.app/)
+
 ## Installation
 
 Clone the repo into your local machine with the following:
