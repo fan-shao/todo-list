@@ -16,6 +16,7 @@
 Clone the repo into your local machine with the following:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ### `git clone https://github.com/fan-shao/todo-list.git`
 <<<<<<< HEAD
 
@@ -27,6 +28,13 @@ Install dependencies using:
 ### `npm install`
 =======
 >>>>>>> 1556189... Update README.md
+=======
+### `git clone https://github.com/fan-shao/todo-list.git`
+
+Install dependencies using:
+
+### `npm install`
+>>>>>>> afb66ad685ba1b9dc6a3878c8ce31254d01bafa3
 
 This app uses React v.17. In the project directory, run the following:
 
@@ -68,6 +76,7 @@ _`List of Todos`_ contains the main content of the page, so it is assigned the *
 
 **`div`** tags are used to help with content placement.
 
+<<<<<<< HEAD
 =======
 ### `git clone`
 
@@ -112,4 +121,6 @@ _`List of Todos`_ contains the main content of the page, so it is assigned the *
 **`div`** tags are used to help with content placement.
 
 >>>>>>> 8a07dfe... first commit
+=======
+>>>>>>> afb66ad685ba1b9dc6a3878c8ce31254d01bafa3
 The CSS is named using the _BEM methodology_. Styling is grouped by component, with the exception of the header.
