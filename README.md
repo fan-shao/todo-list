@@ -17,6 +17,9 @@ Clone the repo into your local machine with the following:
 
 ### `git clone https://github.com/fan-shao/todo-list.git`
 
+Install dependencies using:
+### `npm install`
+
 This app uses React v.17. In the project directory, run the following:
 
 ### `yarn start` or `npm start`
