@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Task: Todo List
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Features**
 
-## Available Scripts
+- Add new items and append them to the bottom of the list with an input and button
+- Remove items from the list
 
-In the project directory, you can run:
+**Optional Features Included**
 
-### `yarn start`
+- Mark item as complete
+- Edit item on list
+- Delete item from list
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Clone the repo into your local machine with the following:
 
-### `yarn test`
+### `git clone`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This app uses React v.17. In the project directory, run the following:
 
-### `yarn build`
+### `yarn start` or `npm start`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser. This app is running in development mode.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## App Information
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The app contains two components: **`App`** and **`Todo`**
 
-### `yarn eject`
+### App Component
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The top level **`App`** component contains the following user actions: `Add Todo` and `Filter Todo by Completion`. The default view for filter is _`View All`_.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The user can add items to the list either by clicking the _`Add Task`_ button or by pressing the `Enter` key. The item will not add if the input box is empty. Added tasks will display on the page.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The `Filter` allows users to display their tasks by completion. The default view is _`View All`_, and they can select also between _`Complete`_ and _`Incomplete`_.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Todo Component
 
-## Learn More
+Contents of the task can be found in the **`Todo`** component. It contains the following user actions:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `Complete Task`: Clicking on the empty box to the left of the task will check off the box and put a strikethrough on the targeted task.
+- `Edit Task`: Clicking on the _`Edit`_ button causes a toggle on both the task and the button for the selected task. The task field will display a text input and the _`Edit`_ button will switch to a _`Save`_ button.
+  - If the user makes no changes or has nothing in the input and clicks _`Save`_, the task will not be modified.
+  - If the user makes a change, upon clicking _`Save`_, if the task was previously complete, it will reset to incomplete: The _`Complete`_ box will become unmarked and the task will not have a strikethrough. If the task was previously incomplete, the display will not change.
+- `Delete Task`: Clicking on the _`Delete`_ button will remove the targeted task from the list.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The list of tasks is displayed with alternating colors to help distinguish between the tasks.
 
-### Code Splitting
+### HTML and CSS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The app is split into 3 sections: _`Header`_, _`User Action`_, and the _`List of Todos`_.
 
-### Analyzing the Bundle Size
+The _`User Action`_ is added in a **`section`** tag because other tags don't seem to fit. The closest is **`nav`**, but the user is not navigating anywhere else.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+_`List of Todos`_ contains the main content of the page, so it is assigned the **`main`** tag.
 
-### Making a Progressive Web App
+**`div`** tags are used to help with content placement.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The CSS is named using the _BEM methodology_. Styling is grouped by component, with the exception of the header.
