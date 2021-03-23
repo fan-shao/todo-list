@@ -29,7 +29,11 @@ function App() {
   const handleEnter = (e) => {
     const code = e.keyCode || e.charCode;
     if (e.key === "Enter" || code === 13) {
+<<<<<<< HEAD
       addTodo(e);
+=======
+      addTodo();
+>>>>>>> 92bc73c... complete
     }
   };
 
