@@ -8,6 +8,13 @@ export default function Todo({
   handleComplete,
   deleteTodo,
   editTodo,
+}: {
+  listId: number;
+  task: string;
+  isComplete: boolean;
+  handleComplete: any;
+  deleteTodo: any;
+  editTodo: any;
 }) {
   const [isEdit, setIsEdit] = useState(false);
   const [editTodoInput, setEditTodoInput] = useState(task);
