@@ -61,10 +61,11 @@ describe("App Component", () => {
   test("select options", () => {
     render(<App />);
 
-    const getSelect = screen.getByTestId("filter-todo");
-    const optionVal = "";
-    userEvent.selectOptions(getSelect, optionVal);
-    expect(getSelect).toBe(true);
+    // can also use option nodes instead of data-testid
+    const getSelect = screen.getByTestId("filter-todos") as HTMLSelectElement;
+    const selectedVal = screen.getByTestId("complete");
+    userEvent.selectOptions(getSelect, selectedVal);
+    expect(getSelect.selectedOptions[0].value).toBe("complete");
   });
 });
 
