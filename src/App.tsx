@@ -103,17 +103,23 @@ function App() {
             </form>
           </div>
           <div className="app__todo-filter">
-            <label htmlFor="filter-list">Filter list by completion:</label>
+            <label htmlFor="filter-todos">Filter list by completion:</label>
             <select
-              id="filter-list"
+              data-testid="filter-todos"
               onChange={(e) => setFilterVal(e.target.value)}
             >
-              <option value="" disabled>
+              <option data-testid="" value="" disabled>
                 Filter by:
               </option>
-              <option value="all">View All</option>
-              <option value="incomplete">View Incomplete</option>
-              <option value="complete">View Complete</option>
+              <option data-testid="all" value="all">
+                View All
+              </option>
+              <option data-testid="incomplete" value="incomplete">
+                View Incomplete
+              </option>
+              <option data-testid="complete" value="complete">
+                View Complete
+              </option>
             </select>
           </div>
         </section>
