@@ -3,14 +3,14 @@
 // this is from robin wieruch
 import React from "react";
 // default from cra
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 // from the docs
 import "@testing-library/jest-dom/extend-expect";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
 
 describe("App Component", () => {
-  test("renders App component", () => {
+  xtest("renders App component", () => {
     render(<App />);
 
     // arrange
@@ -24,29 +24,54 @@ describe("App Component", () => {
     expect(selectFilter).toBeInTheDocument();
   });
 
-  test("input text recorded", () => {
-    render(<input />);
+  xtest("input text recorded", () => {
+    render(<App />);
+
+    const addTodoInput = screen.getByRole("textbox");
+    const sampleText = "Chuck Norris was here";
+    userEvent.type(addTodoInput, sampleText);
+    expect(addTodoInput).toHaveValue(sampleText);
   });
 
   // act
-  xtest("click add button", () => {
+  xtest("clicking add button clears input", () => {
     render(<App />);
+
+    const addTodoInput = screen.getByRole("textbox");
+    const sampleText = "Chuck Norris was here";
+    userEvent.type(addTodoInput, sampleText);
 
     const addTask = screen.getByText(/add task/i);
     userEvent.click(addTask);
-    // what happens when you click
+    expect(addTodoInput).toHaveValue("");
+  });
 
-    // submit button
-    // on enter
+  xtest("pressing enter clears input", () => {
+    render(<App />);
 
-    // fireEvent.keyDown(domNode, { key: 'Enter', code: 'Enter' })
+    const addTodoInput = screen.getByRole("textbox");
+    const sampleText = "Chuck Norris was here";
+    userEvent.type(addTodoInput, sampleText);
 
-    // select option
+    // how to check it clears here
+    fireEvent.keyUp(addTodoInput, { key: /enter/i, code: /enter/i });
+    expect(addTodoInput).toHaveValue("");
+  });
 
-    // // this outputs html of component, helps you with debugging, helps you write code with more confidence
-    // screen.debug();
+  test("select options", () => {
+    render(<App />);
+
+    const getSelect = screen.getByTestId("filter-todo");
+    const optionVal = "";
+    userEvent.selectOptions(getSelect, optionVal);
+    expect(getSelect).toBe(true);
   });
 });
+
+// select option
+
+// // this outputs html of component, helps you with debugging, helps you write code with more confidence
+// screen.debug();
 
 // test("renders input, button, dropdown", () => {
 //   render(<App />);
