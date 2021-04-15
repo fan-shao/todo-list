@@ -33,13 +33,6 @@ function App() {
     setUserInput("");
   };
 
-  const handleEnter = (e: any) => {
-    const code = e.keyCode || e.charCode;
-    if (e.key === "Enter" || code === 13) {
-      addTodo(e);
-    }
-  };
-
   // task features
   const handleComplete = (id: number) => {
     const newList = todos.map((todo) => {
@@ -99,9 +92,9 @@ function App() {
           <div className="app__todo-input">
             <form name="add-todo" onSubmit={(e) => addTodo(e)}>
               <input
+                type="text"
                 placeholder="Add Item"
                 value={userInput}
-                onKeyUp={(e) => handleEnter(e)}
                 onChange={(e) => setUserInput(e.target.value)}
               />
               <button type="submit" value="submit">
