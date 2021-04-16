@@ -3,13 +3,23 @@
 // this is from robin wieruch
 import React from "react";
 // default from cra
-import { render, screen, fireEvent } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  findByText,
+  waitFor,
+  getByText,
+  waitForElementToBeRemoved,
+  queryByText,
+} from "@testing-library/react";
 // from the docs
 import "@testing-library/jest-dom/extend-expect";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
+import Todo from "./Todo";
 
-describe("App Component", () => {
+xdescribe("App Component", () => {
   xtest("renders App component", () => {
     render(<App />);
 
@@ -58,7 +68,7 @@ describe("App Component", () => {
     expect(addTodoInput).toHaveValue("");
   });
 
-  test("select options", () => {
+  xtest("select option: complete", () => {
     render(<App />);
 
     // can also use option nodes instead of data-testid
@@ -67,6 +77,127 @@ describe("App Component", () => {
     userEvent.selectOptions(getSelect, selectedVal);
     expect(getSelect.selectedOptions[0].value).toBe("complete");
   });
+});
+
+describe("Todo Component", () => {
+  xtest("empty input produces no list item", async () => {
+    render(<App />);
+
+    const addTodoInput = screen.getByRole("textbox");
+    const sampleText = "";
+    userEvent.type(addTodoInput, sampleText);
+
+    const addTask = screen.getByText(/add task/i);
+    userEvent.click(addTask);
+
+    // there should be no list item
+    const todoContainer = screen.queryByTestId("todo-container");
+    expect(todoContainer).toBeNull();
+  });
+
+  xtest("add text produces list item", async () => {
+    render(<App />);
+
+    const addTodoInput = screen.getByRole("textbox");
+    const sampleText = "Buy 10 gallons of ice cream";
+    userEvent.type(addTodoInput, sampleText);
+
+    const addTask = screen.getByText(/add task/i);
+    userEvent.click(addTask);
+    await waitFor(() => {
+      const deleteBtn = screen.getByText(/delete/i);
+      expect(deleteBtn).toBeInTheDocument();
+      const editBtn = screen.getByText(/edit/i);
+      expect(editBtn).toBeInTheDocument();
+      const listText = screen.getByText(sampleText);
+      expect(listText).toBeInTheDocument();
+    });
+  });
+
+  xtest("add text 3x produces 3 list items", async () => {
+    render(<App />);
+    const addTodoInput = screen.getByRole("textbox");
+    const sampleText = "Buy 10 gallons of ice cream";
+
+    const addMultipleTasks = jest.fn(() => {
+      userEvent.type(addTodoInput, sampleText);
+      const addTask = screen.getByText(/add task/i);
+      userEvent.click(addTask);
+      return;
+    });
+
+    addMultipleTasks();
+    addMultipleTasks();
+    addMultipleTasks();
+
+    expect(addMultipleTasks).toHaveReturnedTimes(3);
+
+    await waitFor(() => {
+      // query returns array of matching nodes
+      // find and get by returns some weird ass nodes
+      const list = screen.queryAllByText("Buy 10 gallons of ice cream");
+      expect(list).toHaveLength(3);
+    });
+  });
+
+  xtest("delete removes chosen item from list", async () => {
+    render(<App />);
+    const addTodoInput = screen.getByRole("textbox");
+
+    const addMultipleTasks = jest.fn((todo) => {
+      userEvent.type(addTodoInput, todo);
+      const addTask = screen.getByText(/add task/i);
+      userEvent.click(addTask);
+      return;
+    });
+
+    addMultipleTasks("weewhoo weewhoo");
+    addMultipleTasks("blub blub");
+    addMultipleTasks("grubb grubb");
+
+    await waitFor(() => {
+      const deleteBtns = screen.queryAllByText(/delete/i);
+      expect(deleteBtns).toHaveLength(3);
+    });
+
+    let deleteBtns = screen.queryAllByText(/delete/i);
+    const deleteTodo = screen.queryByText("blub blub");
+    console.log("btn delete", deleteBtns[1]);
+    userEvent.click(deleteBtns[1]);
+
+    await waitFor(() => {
+      expect(deleteTodo).not.toBeInTheDocument();
+    });
+
+    deleteBtns = screen.queryAllByText(/delete/i);
+    expect(deleteBtns).toHaveLength(2);
+  });
+
+  test("check completion", () => {
+    render(<App />);
+  });
+
+  // if container OR check box is clicked, then strike through should only occur in that container
+
+  // this is its own test
+  // EDITING
+  // if click on edit, several things should happen:
+  // edit button should now be save
+  // input text should appear
+  // upon clicking text, input should clear
+  // if save when input is clear:
+  // button switches back to edit
+  // input box is removed
+  // original text is back
+  // if it was incomplete, it will display incomplete
+  // if not clear
+  // it should be incomplete
+  // button switches back
+  // input removed
+  // new text in place
+
+  // FILTER
+  // if value is filter, all the items on the list should have the given value
 });
 
 // select option
