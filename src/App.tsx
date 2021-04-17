@@ -8,11 +8,18 @@ interface List {
   isComplete: boolean;
 }
 
+enum FilterOptions {
+  none = "",
+  all = "all",
+  incomplete = "incomplete",
+  complete = "complete",
+}
+
 function App() {
   // hooks are type coerced
   const [userInput, setUserInput] = useState<string>("");
   const [todos, setTodos] = useState<List[]>([]);
-  const [filterVal, setFilterVal] = useState<string>("");
+  const [filterVal, setFilterVal] = useState<FilterOptions>(FilterOptions.none);
 
   const generateId = () => {
     let id = Math.ceil(Math.random() * Math.pow(10, 6));
@@ -65,8 +72,9 @@ function App() {
 
   let filteredResult = todos
     .filter((todo) => {
-      if (filterVal === "incomplete") return todo.isComplete === false;
-      if (filterVal === "complete") return todo.isComplete === true;
+      if (filterVal === FilterOptions.incomplete)
+        return todo.isComplete === false;
+      if (filterVal === FilterOptions.complete) return todo.isComplete === true;
       return todo;
     })
     .map(({ listId, task, isComplete }) => {
@@ -106,18 +114,28 @@ function App() {
             <label htmlFor="filter-todos">Filter list by completion:</label>
             <select
               data-testid="filter-todos"
-              onChange={(e) => setFilterVal(e.target.value)}
+              onChange={(e) => setFilterVal(e.target.value as FilterOptions)}
             >
-              <option data-testid="" value="" disabled>
+              <option
+                data-testid={FilterOptions.none}
+                value={FilterOptions.none}
+                disabled
+              >
                 Filter by:
               </option>
-              <option data-testid="all" value="all">
+              <option data-testid={FilterOptions.all} value={FilterOptions.all}>
                 View All
               </option>
-              <option data-testid="incomplete" value="incomplete">
+              <option
+                data-testid={FilterOptions.incomplete}
+                value={FilterOptions.incomplete}
+              >
                 View Incomplete
               </option>
-              <option data-testid="complete" value="complete">
+              <option
+                data-testid={FilterOptions.complete}
+                value={FilterOptions.complete}
+              >
                 View Complete
               </option>
             </select>
